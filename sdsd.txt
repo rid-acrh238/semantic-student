@@ -1,4 +1,4 @@
-# Sistem Bendahara Management
+<!-- # Sistem Bendahara Management
 
 Sistem ini digunakan untuk **membantu bendahara** dalam mengelola keuangan organisasi, mulai dari pencatatan transaksi hingga laporan keuangan.
 
@@ -75,4 +75,4 @@ php artisan serve
 
 ## 👨‍💻 Contributor
 - **Teuku Aryansyah Pratama** 
-
+ -->
