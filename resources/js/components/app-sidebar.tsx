@@ -5,7 +5,9 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Wallet } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Wallet, User, Settings, LogOut} from 'lucide-react';
+import { router } from '@inertiajs/react';
+import { logout } from '@/routes';
 
 const mainNavItems: NavItem[] = [
     {
@@ -19,13 +21,26 @@ const mainNavItems: NavItem[] = [
         icon: Wallet,
     },
     {
+        title: "Anggota",
+        href: "/members",
+        icon: User,
+    },
+    {
         title: "Laporan",
         href: "/reports",
         icon: Folder,
     },
+    
 ];
 
 const footerNavItems: NavItem[] = [
+    
+    {
+        title: "Pengaturan",
+        href: "/settings",
+        icon: Settings,
+    },
+    
     {
         title: 'Repository',
         href: 'https://github.com/laravel/react-starter-kit',
@@ -60,6 +75,15 @@ export function AppSidebar() {
 
             <SidebarFooter>
                 <NavFooter items={footerNavItems} className="mt-auto" />
+                <SidebarMenuItem>
+                    <SidebarMenuButton
+                    type="button"
+                    onClick={() => router.post('/logout')}
+                    >
+                        <LogOut />
+                        <span>Logout</span>
+                        </SidebarMenuButton>
+                        </SidebarMenuItem>
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

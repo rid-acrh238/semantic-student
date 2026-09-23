@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\Transaction;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function superadmin()
     {
-        $income = Transaction::where('type', 'income')->sum('amount');
-        $expense = Transaction::where('type', 'expense')->sum('amount');
+        return Inertia::render('superadmin/dashboard');
+    }
 
-        $balance = $income - $expense;
+    public function admin()
+    {
+        return Inertia::render('admin/dashboard');
+    }
 
-        return Inertia::render('dashboard', [
-            'balance' => $balance,
-            'income' => $income,
-            'expense' => $expense,
-        ]);
+    public function mahasiswa()
+    {
+        return Inertia::render('mahasiswa/dashboard');
     }
 }

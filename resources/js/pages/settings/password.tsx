@@ -12,6 +12,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { edit } from '@/routes/password';
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -21,6 +23,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Password() {
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordCurrent, setShowPasswordCurrent] = useState(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
 
@@ -54,47 +59,76 @@ export default function Password() {
                             <>
                                 <div className="grid gap-2">
                                     <Label htmlFor="current_password">Current password</Label>
-
+                                    <div className="relative">
                                     <Input
                                         id="current_password"
                                         ref={currentPasswordInput}
                                         name="current_password"
-                                        type="password"
+                                        type={showPasswordCurrent ? 'text' : 'password'}
                                         className="mt-1 block w-full"
                                         autoComplete="current-password"
                                         placeholder="Current password"
                                     />
-
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPasswordCurrent(!showPasswordCurrent)}
+                                        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground"
+                                        aria-label={showPasswordCurrent ? 'Hide current password' : 'Show current password'}
+                                        tabIndex={-1}
+                                    >
+                                        {showPasswordCurrent ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                    </button>
+                                    </div>
                                     <InputError message={errors.current_password} />
                                 </div>
 
                                 <div className="grid gap-2">
                                     <Label htmlFor="password">New password</Label>
-
+                                    <div className="relative">
                                     <Input
                                         id="password"
                                         ref={passwordInput}
                                         name="password"
-                                        type="password"
+                                        type={showPassword ? 'text' : 'password'}
                                         className="mt-1 block w-full"
                                         autoComplete="new-password"
                                         placeholder="New password"
                                     />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground"
+                                        aria-label={showPassword ? 'Hide new password' : 'Show new password'}
+                                        tabIndex={-1}
+                                    >
+                                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                    </button>
+                                    </div>
 
                                     <InputError message={errors.password} />
                                 </div>
 
                                 <div className="grid gap-2">
                                     <Label htmlFor="password_confirmation">Confirm password</Label>
-
-                                    <Input
-                                        id="password_confirmation"
-                                        name="password_confirmation"
-                                        type="password"
-                                        className="mt-1 block w-full"
-                                        autoComplete="new-password"
-                                        placeholder="Confirm password"
-                                    />
+                                    <div className="relative">
+                                        <Input
+                                            id="password_confirmation"
+                                            name="password_confirmation"
+                                            type={showPasswordConfirmation ? 'text' : 'password'}
+                                            className="mt-1 block w-full"
+                                            autoComplete="new-password"
+                                            placeholder="Confirm password"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPasswordConfirmation(!showPasswordConfirmation)}
+                                            className="absolute right-2 top-1/2 z-10 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground"
+                                            aria-label={showPasswordConfirmation ? 'Hide password confirmation' : 'Show password confirmation'}
+                                            tabIndex={-1}
+                                        >
+                                            {showPasswordConfirmation ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                        </button>
+                                    </div>
 
                                     <InputError message={errors.password_confirmation} />
                                 </div>
